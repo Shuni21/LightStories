@@ -1,0 +1,191 @@
+.album {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    z-index: 1000; 
+}
+
+.album__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.album__title {
+    font-family: 'Jaini Purva', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #000000;
+    margin-right: 20px;
+    margin-bottom: 5px; 
+}
+
+.album__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Навигация */
+.album__nav {
+    display: flex;
+    gap: 120px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
+.album__link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    transition: color 0.3s;
+    font-weight: bold;
+    font-family: 'Jaini Purva', sans-serif;
+}
+
+.album__link:hover {
+    color: #4790a4;
+}
+
+.album__triangle {
+    position: absolute;
+    top: -610px; 
+    left: -280px; 
+    width: 1000px; 
+    height: 800px; 
+    box-shadow: 0 20px 15px rgba(0, 0, 0, 0.25);
+    background: #fff;
+    transform: rotate(-20deg); 
+    z-index: -1;
+}
+
+.albumcontent {
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+    color: #fff;
+    max-width: 600px;
+    text-align: left;
+    margin-left: 0; 
+    position: fixed; 
+    top: 230px; 
+    left: 0; 
+    padding: 20px;
+    z-index: 999; 
+}
+
+.album__h1 {
+    color: black;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 600;
+    font-size: 65px; 
+    margin: 5; 
+}
+
+.album__sticker {
+    top: 20px;
+    width: 40px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+/* Медиа-запросы */
+@media (max-width: 1200px) {
+    .album__triangle {
+        left: 400px;
+    }
+}
+
+@media (max-width: 800px) {
+    .album__triangle {
+        left: 200px;
+    }
+}
+
+.album__search {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 200px;
+    font-family: 'Jaini Purva', sans-serif;
+}
+
+/* Кнопка меню */
+.album__menu-btn {
+    padding: 8px 12px;
+    background-color: #4790a4;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Jaini Purva', sans-serif;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.album__menu-btn:hover {
+    background-color: #367d91;
+}
+
+/* Выпадающее меню */
+.album__dropdown {
+    position: absolute;
+    top: 140px; /* можно подкорректировать */
+    left: 20px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    animation: fadeIn 0.3s ease; /* Анимация появления */
+}
+
+.album__dropdown-link {
+    display: block;
+    color: #000000;
+    padding: 8px 12px;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Jaini Purva', sans-serif;
+    font-weight: bold;
+}
+
+.album__dropdown-link:hover {
+    background-color: #4790a4;
+    color: white;
+}
+
+/* Кнопка закрытия */
+.album__close-btn {
+    margin-top: 10px;
+    padding: 6px 10px;
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Jaini Purva', sans-serif;
+    transition: background-color 0.3s;
+}
+
+.album__close-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Анимация для плавного появления меню */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+

@@ -1,0 +1,110 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 20px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    color: white;
+    z-index: 1000; 
+}
+
+/* Заголовок и навигация */
+.header__title {
+    font-family: 'Jaini Purva', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 20px;
+}
+
+.header__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Навигация */
+.header__nav {
+    display: flex;
+    gap: 120px;
+    margin-bottom: 10px;
+    margin-right: 30px;
+}
+
+.header__link {
+    text-decoration: none;
+    color: #000000;
+    font-size: 18px;
+    transition: color 0.3s;
+    font-weight: bold;
+    font-family: 'Jaini Purva', sans-serif;
+}
+
+.header__link:hover {
+    color: #4790a4;
+}
+
+.header__triangle {
+    position: absolute;
+    top: -390px;
+    left: 760px;
+    width: 2101px;
+    height: 1088px;
+    box-shadow: 0 30px 19px 0 rgba(0, 0, 0, 0.25);
+    background: #fff;
+    transform: rotate(-140deg);
+    z-index: -1;
+}
+
+.headercontent {
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 600;
+    font-size: 40px;
+    color: #fff;
+    max-width: 600px;
+    text-align: left;
+    margin-left: 0; /* Расположен вплотную к левому краю */
+    position: fixed; 
+    top: 190px; 
+    left: 0; 
+    padding: 20px;
+    z-index: 999; 
+}
+
+.header__h1 {
+    color: black;
+    font-family: 'Advent Pro', sans-serif;
+    font-weight: 600;
+    font-size: 65px;
+    z-index: 1;
+    margin-right: -30px;
+    text-align: right;
+}
+
+.header__sticker {
+    top: 20px;
+    width: 40px;
+    height: auto;
+}
+
+/* Медиа-запросы */
+@media (max-width: 1200px) {
+    .header__triangle {
+        left: 400px;
+    }
+}
+
+@media (max-width: 800px) {
+    .header__triangle {
+        left: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .header__triangle {
+        left: 0;
+    }
+}
