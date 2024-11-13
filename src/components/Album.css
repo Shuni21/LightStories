@@ -85,7 +85,7 @@
     font-family: 'Advent Pro', sans-serif;
     font-weight: 600;
     font-size: 65px; 
-    margin: 5; 
+    margin: 5px;
 }
 
 .album__sticker {
@@ -93,18 +93,6 @@
     width: 40px;
     height: auto;
     filter: brightness(0) invert(1);
-}
-/* Медиа-запросы */
-@media (max-width: 1200px) {
-    .album__triangle {
-        left: 400px;
-    }
-}
-
-@media (max-width: 800px) {
-    .album__triangle {
-        left: 200px;
-    }
 }
 
 .album__search {
@@ -201,11 +189,9 @@
 }
 
 .album__rectangle-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px; /* Отступ сверху */
+    display: grid;
+    grid-template-columns: 30%;
+
 }
 
 .album__rectangle {
@@ -233,4 +219,18 @@
     display: flex;
     align-items: center;     
     justify-content: center; 
+}
+.album__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Четыре колонки в ряду */
+    gap: 70px; /* Отступы между изображениями */
+    justify-items: center;
+    align-items: center;
+    width: 60%;
+    margin-top: 200px;
+
+}
+
+.album__rectangle-container {
+    width: 100%; /* Ширина каждого элемента в сетке будет регулироваться контейнером grid */
 }
