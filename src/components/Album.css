@@ -125,7 +125,7 @@
 /* Выпадающее меню */
 .album__dropdown {
     position: absolute;
-    top: 140px; /* можно подкорректировать */
+    top: 140px;
     left: 20px;
     background-color: #ffffff;
     border-radius: 4px;
@@ -196,13 +196,13 @@
 
 .album__rectangle {
     border-radius: 20px;
-    width: 300px;
-    height: 404px;
+    width: 330px;
+    height: 460px;
     box-shadow: 18px 25px 16px 0 rgba(0, 0, 0, 0.25);
     background: #fff;
 }
 .album__rectangle-content {
-    padding-top: 20px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center; 
@@ -212,25 +212,32 @@
 }
 
 .photo {
+    margin-top: 10px;
     border-radius: 20px;
-    width: 260px;
-    height: 260px;
+    width: 290px;
+    height: 290px;
     background-color: #000000;
     display: flex;
     align-items: center;     
-    justify-content: center; 
+    justify-content: center;
+
 }
 .album__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Четыре колонки в ряду */
-    gap: 70px; /* Отступы между изображениями */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     justify-items: center;
     align-items: center;
     width: 60%;
-    margin-top: 200px;
+    margin-top: 220px;
 
 }
 
 .album__rectangle-container {
-    width: 100%; /* Ширина каждого элемента в сетке будет регулироваться контейнером grid */
+    width: 135%;
+}
+
+.photo_name{
+    font-family: 'Jaini Purva', sans-serif;
+    padding-top: 20px;
 }

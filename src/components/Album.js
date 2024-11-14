@@ -1,32 +1,31 @@
+// Album.js
 import React, { useState, useEffect } from "react";
 import "./Album.css";
 import Sticker from '../assets/PersonCircle.svg';
 
-function Album({ setSection }) {
+function Album({ setSection, setSelectedPhoto }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [photos, setPhotos] = useState([]);  // Стейт для хранения списка фотографий
+  const [photos, setPhotos] = useState([]);
 
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
+  // Переключение меню
+  const toggleMenu = () => setMenuOpen(!isMenuOpen);
 
-  // Загружаем фотографии с сервера
+  // Загрузка фотографий при монтировании компонента
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
         const response = await fetch("http://localhost:5000/data");
         const data = await response.json();
-        setPhotos(data);  // Обновляем стейт с фотографиями
+        setPhotos(data);
       } catch (error) {
         console.error("Ошибка при загрузке фотографий:", error);
       }
     };
-
     fetchPhotos();
-  }, []);  // Запрос будет сделан только при монтировании компонента
+  }, []);
 
-  // Фильтрация фотографий по поисковому запросу
+  // Фильтрация фотографий по запросу поиска
   const filteredPhotos = photos.filter((photo) =>
       photo.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -48,22 +47,32 @@ function Album({ setSection }) {
                     <button className="album__close-btn" onClick={toggleMenu}>
                       Закрыть
                     </button>
-                    <a href="#главное" className="album__dropdown-link"
-                       onClick={() => setSection("Главное")}>Главное</a>
-                    <a href="#о-нас" className="album__dropdown-link" onClick={() => setSection("О нас")}>О нас</a>
-                    <a href="#фотоальбом" className="album__dropdown-link"
-                       onClick={() => setSection("Фотоальбом")}>Фотоальбом</a>
+                    <a href="#главное" className="album__dropdown-link" onClick={() => setSection("Главное")}>
+                      Главное
+                    </a>
+                    <a href="#о-нас" className="album__dropdown-link" onClick={() => setSection("О нас")}>
+                      О нас
+                    </a>
+                    <a href="#фотоальбом" className="album__dropdown-link" onClick={() => setSection("Фотоальбом")}>
+                      Фотоальбом
+                    </a>
                   </div>
               )}
             </div>
 
             <div className="album__content">
               <nav className="album__nav">
-                <a href="#главное" className="album__link" onClick={() => setSection("Главное")}>Главное</a>
-                <a href="#о-нас" className="album__link" onClick={() => setSection("О нас")}>О нас</a>
-                <a href="#фотоальбом" className="album__link" onClick={() => setSection("Фотоальбом")}>Фотоальбом</a>
+                <a href="#главное" className="album__link" onClick={() => setSection("Главное")}>
+                  Главное
+                </a>
+                <a href="#о-нас" className="album__link" onClick={() => setSection("О нас")}>
+                  О нас
+                </a>
+                <a href="#фотоальбом" className="album__link" onClick={() => setSection("Фотоальбом")}>
+                  Фотоальбом
+                </a>
                 <a href="#логин" className="album__link">
-                  <img src={Sticker} alt="Sticker" className="album__sticker"/>
+                  <img src={Sticker} alt="Sticker" className="album__sticker" />
                 </a>
               </nav>
               <input
@@ -79,10 +88,16 @@ function Album({ setSection }) {
         </div>
 
         <div className="album__grid">
-          {/* Отображение фотографий */}
           {filteredPhotos.length > 0 ? (
               filteredPhotos.map((photo) => (
-                  <div key={photo.id} className="album__rectangle-container">
+                  <div
+                      key={photo.id}
+                      className="album__rectangle-container"
+                      onClick={() => {
+                        setSelectedPhoto(photo);  // Устанавливаем выбранное фото
+                        setSection("PhotoPage");   // Переключаемся на страницу фото
+                      }}
+                  >
                     <div className="album__rectangle">
                       <div className="album__rectangle-content">
                         <img src={photo.photo} alt={photo.name} className="photo" />
