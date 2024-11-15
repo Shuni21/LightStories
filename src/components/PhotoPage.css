@@ -1,16 +1,8 @@
-.album {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 10px 20px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: white;
-    z-index: 1000;
-}
 
+.photo-page__container {
+    display: flex;
+    flex-direction: column;
+}
 .photopage__left {
     display: flex;
     flex-direction: column;

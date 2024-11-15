@@ -6,6 +6,9 @@ const path = require('path');
 const app = express();
 const port = 5000;
 
+// Разрешаем CORS для фронтенда на порту 3000
+app.use(cors({ origin: 'http://localhost:3000' }));
+
 const pool = new Pool({
     user: 'postgres',
     host: 'localhost',
@@ -23,8 +26,8 @@ app.get('/data', async (req, res) => {
         const photos = result.rows.map(photo => ({
             id: photo.id,
             name: photo.name,
-            // Путь для изображения
-            photo: `http://localhost:5000/data/images/${path.basename(photo.photo)}`
+            photo: `http://localhost:5000/data/images/${path.basename(photo.photo)}`,
+            category: photo.category
         }));
         res.json(photos);
     } catch (error) {
@@ -32,6 +35,22 @@ app.get('/data', async (req, res) => {
         res.status(500).json({ error: 'Ошибка сервера' });
     }
 });
+
+app.get('/data/comments/:photoId', async (req, res) => {
+    const { photoId } = req.params;
+    try {
+        const result = await pool.query(
+            'SELECT author, comment FROM "LightStories".comment WHERE photo_id = $1',
+            [photoId]
+        );
+        const comments = result.rows;
+        res.json(comments);
+    } catch (error) {
+        console.error('Ошибка при получении комментариев:', error);
+        res.status(500).json({ error: 'Ошибка сервера' });
+    }
+});
+
 
 app.listen(port, () => {
     console.log(`Сервер запущен на http://localhost:${port}/data`);

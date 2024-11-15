@@ -1,4 +1,3 @@
-// Album.js
 import React, { useState, useEffect } from "react";
 import "./Album.css";
 import Sticker from '../assets/PersonCircle.svg';
@@ -7,28 +6,34 @@ function Album({ setSection, setSelectedPhoto }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [photos, setPhotos] = useState([]);
+  const [categories, setCategories] = useState([]); // состояние для категорий
+  const [selectedCategory, setSelectedCategory] = useState(""); // выбранная категория
 
-  // Переключение меню
-  const toggleMenu = () => setMenuOpen(!isMenuOpen);
-
-  // Загрузка фотографий при монтировании компонента
+  // Загрузка фотографий и категорий при монтировании компонента
   useEffect(() => {
-    const fetchPhotos = async () => {
+    const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:5000/data");
         const data = await response.json();
         setPhotos(data);
+
+        // Получаем список уникальных категорий
+        const uniqueCategories = [...new Set(data.map(photo => photo.category))];
+        setCategories(uniqueCategories);
       } catch (error) {
-        console.error("Ошибка при загрузке фотографий:", error);
+        console.error("Ошибка при загрузке данных:", error);
       }
     };
-    fetchPhotos();
+    fetchData();
   }, []);
 
-  // Фильтрация фотографий по запросу поиска
-  const filteredPhotos = photos.filter((photo) =>
-      photo.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Фильтрация фотографий по запросу поиска и выбранной категории
+  const filteredPhotos = photos.filter((photo) => {
+    return (
+        photo.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        (selectedCategory === "" || photo.category === selectedCategory)
+    );
+  });
 
   return (
       <div className="album__container">
@@ -38,26 +43,19 @@ function Album({ setSection, setSelectedPhoto }) {
               <div className="album__title">LightStories</div>
               <h1 className="album__h1">Фотоальбом</h1>
 
-              <button className="album__menu-btn" onClick={toggleMenu}>
-                Меню
-              </button>
-
-              {isMenuOpen && (
-                  <div className="album__dropdown">
-                    <button className="album__close-btn" onClick={toggleMenu}>
-                      Закрыть
-                    </button>
-                    <a href="#главное" className="album__dropdown-link" onClick={() => setSection("Главное")}>
-                      Главное
-                    </a>
-                    <a href="#о-нас" className="album__dropdown-link" onClick={() => setSection("О нас")}>
-                      О нас
-                    </a>
-                    <a href="#фотоальбом" className="album__dropdown-link" onClick={() => setSection("Фотоальбом")}>
-                      Фотоальбом
-                    </a>
-                  </div>
-              )}
+              {/* Селектор для выбора категории */}
+              <select
+                  className="album__category-select"
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                <option value="">Категории ↓</option>
+                {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                ))}
+              </select>
             </div>
 
             <div className="album__content">
@@ -94,8 +92,8 @@ function Album({ setSection, setSelectedPhoto }) {
                       key={photo.id}
                       className="album__rectangle-container"
                       onClick={() => {
-                        setSelectedPhoto(photo);  // Устанавливаем выбранное фото
-                        setSection("PhotoPage");   // Переключаемся на страницу фото
+                        setSelectedPhoto(photo); // Устанавливаем выбранное фото
+                        setSection("PhotoPage"); // Переключаемся на страницу фото
                       }}
                   >
                     <div className="album__rectangle">

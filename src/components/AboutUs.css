@@ -50,7 +50,7 @@
 .about__triangle {
     position: absolute;
     top: -390px;
-    left: 750px;
+    left: 500px;
     width: 2101px;
     height: 1088px;
     box-shadow: 0 30px 19px 0 rgba(0, 0, 0, 0.25);
@@ -68,7 +68,7 @@
     text-align: left;
     margin-left: 0; /* Расположен вплотную к левому краю */
     position: fixed; 
-    top: 130px; 
+    top: 50px;
     left: 0; 
     padding: 20px;
     z-index: 999; 
